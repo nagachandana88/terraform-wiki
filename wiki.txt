@@ -8,3 +8,10 @@ how to create workspaces?
      ==>terraform new dev.tfvars  # it is created new dev directory it save the dev.tfvars file in dev directory
      
      ==>terraform new qa.tfvars  # it is created new QA directory it save the QA.tfvars file in QA directory
+     
+     
+what is backend?
+--> it is used to store state file in s3 bucket.
+
+how to lock state file?
+--> To lock the state file using dynamodb.
