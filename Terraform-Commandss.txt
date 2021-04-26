@@ -1,0 +1,16 @@
+==================================Terraform Comands=============================
+>>aws configure (now we pass access and security keys maualy)
+
+>>Terraform init  (now installing packages)
+
+>>Terraform validate (it is chacking code valied are not)
+
+>>Terraform plan  (It is dry run)
+
+>>Terraform apply (It is apply but asking permision)
+
+>>Terraform apply --auto-approve (it is not asking permision directly exicute)
+
+>>Terraform destroy --auto-approve (It is destroying whatever we creating it is single time destroy)
+
+
