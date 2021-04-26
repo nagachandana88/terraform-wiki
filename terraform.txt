@@ -1,0 +1,131 @@
+	          					*******Terraform***********
+
+>>Terraform is replacement of cloudformation(AWS) and Armtemplates(Azure)
+
+===Chalanges of Manual-deployment===
+1.Time taking tasks delay of work.
+2.Error prone
+3.Hard to understand when new person join in same position.
+
+===Chalanges with Cloud formation and Aramtemplates===
+1.Json/Yaml is complex step learning curve.
+2.Entaire configuration must be in a single file.
+3.cloud formation and armtemplates are slow in deployment.
+4.importing existing resources in the cloudformation is complex not possiable in ARM.
+5.Cloud formaton works for AWS and Armtemplates works for Azure.
+
+
+==Terraform can solve most of the above chalanges===
+1.Use HCL(Hashicorp Configuration Language) to develop the manifests.
+2.we can have config in multiple files.
+3.Terraform plan can perform a dry run.
+4.Importing Easy.
+5.Trerraform is fast.
+6.Creation of multiple resource is easy.
+7.Terraform used with any cloud but code is not same for all venders.
+
+
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs(Terraform documentation)
+https://www.terraform.io/downloads.html(downloading)
+
+Terraform1.tf
+=============
+provider "aws" {
+    #aaccess_key = "AKIAZHXP4MVV3LUDJHU5"
+    #secret_key = "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"
+    region = "us-east-1"
+
+}
+
+resource "aws_vpc" "Sambavpc" {
+    cidr_block = "10.2.0.0/16"
+    enable_dns_hostnames = true
+    tags = {
+      "name" = "My_vpc"
+    }
+  
+}
+
+resource "aws_subnet" "sambaapp" {
+    vpc_id = "aws_vpc.Sambavpc.id"
+    cidr_block = "10.0.1.0/24"
+    tags = {
+      "name" = "App_server"
+    }
+
+}
+
+>>Provider is used for the identification of the cloud(AWS or Azure)
+
+resource "Type" "Name"{
+
+}
+
+
+output "vpcid"{
+	value="${aws_vpc.Sambavpc.id}"
+}
+
+>>now we getting the vpcid
+
+
+>>resource always create a service in the cloud
+>>Type means what can i create in the cloud(EX: vpc,subnet,IGW)
+>>Name: without name we can't create resource (name is mandetary)
+
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+
+
+Document having Argument Reference and Attributes Reference
+-----------------------------------------------------------:
+
+Argument Reference:
+------------------
+>>In this arguments having some information requried and optional arguments list. This is helpfull
+>>This arguments when we creating new resorce that time it is usefull.
+
+
+Attributes Reference:
+--------------------
+>>It is after creating resource file. exporting some information .tfstate file that is called Attributes
+
+
+Resource:
+--------
+>>It is used for creting the information.
+Data:
+----
+>>It is used for get the information.
+
+
+Data "aws_vpc" "Green"{
+	id="vpc-of47707ghfuuo838"
+}
+
+>>Green is the vpc name and id is the vpc id(I getting green vpc details)
+
+output "greenvpc"{
+	value="${data.aws_vpc.Green.cider_block}"
+}
+>>now we getting output is cider_block ip(ex:10.1.0.0/16)
+
+output "Greenname"{
+	value="${data.aws_vpc.green.tags.name}"
+}
+>>Now we getting output of tag name
+
+
+Terraform running process:
+--------------------------
+Provider----->Data---->Resource
+
+>>First runing provider after Data after resource--
+
+
+
+
+
+
+Provider----->Data------>Resource
+
+first running Provider after Data after Resource
